@@ -1,11 +1,26 @@
-import Home from './Pages/Home'
+import { useState } from 'react'
+import { BrowserRouter } from 'react-router-dom'
+import { ProductProvider } from './context/ProductContext'
+import RoutesIndex from './routes/RoutesIndex'
+import Navbar from './components/Index'
 import './App.css'
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState('')
 
   return (
     <>
-      <Home/>
+      <ProductProvider>
+
+        <BrowserRouter>
+
+          <Navbar setSearchTerm={setSearchTerm}/>
+
+          <RoutesIndex searchTerm={searchTerm}/>
+
+        </BrowserRouter>
+
+      </ProductProvider>
     </>
   )
 }
