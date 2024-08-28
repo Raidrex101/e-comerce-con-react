@@ -6,7 +6,7 @@ import reactLogo from '..//assets/react.svg'
 import '../styles/form.css'
 const Login = () => {
   
-  const navigate = useNavigate()
+  const navigate = useNavigate()//para redireccionar
   const {login} = useAuthContext()
 
   const {
@@ -17,8 +17,8 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await loginUser(data)
-      if (response.status === 200) {
+      const response = await loginUser(data) //se le pasa la data de la peticion para comprobar si el usuario existe
+      if (response.status === 200) { //si la respuesta de la peticion es 200 (exitosa en este caso)te regresa al login
         console.log('User logged in successfully')
         
         login(response.data.token)
@@ -32,7 +32,7 @@ const Login = () => {
 
   return (
     <main className="form-signin w-100 m-auto">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>{/* que va a hacer cuando le demos submit */}
         <img
           className="mb-4 d-block mx-auto"
           src={reactLogo}
@@ -48,7 +48,7 @@ const Login = () => {
             className="form-control"
             id="email"
             placeholder="name@example.com"
-            {...register('email',{required:true})}
+            {...register('email',{required:true})} //todos los register son de react hook form para guardar los datos y mandarlos
           />
           <label htmlFor="floatingInput">Email address</label>
         </div>

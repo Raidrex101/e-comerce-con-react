@@ -20,11 +20,11 @@ const createProduct = (productData, token) => axios.post(`${Main_URL}/items`, pr
         Authorization: `Bearer ${token}`
     }
 })
+ //aqui se guardan todas las peticiones axios para tenerlas en un solo lugar
 
-
-export {
+export {//se expertan para utilizarse donde se necesite
     registerUser,
-    loginUser,
+    loginUser, 
     getMyUserService,
     deleteAProduct,
     createProduct,

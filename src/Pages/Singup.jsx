@@ -10,17 +10,17 @@ const Singup = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm()
+  } = useForm() // parametros de react hook form a utilizar
 
-  const onsSubmit = async (data) => {
+  const onsSubmit = async (data) => {//realiza una peticion con la DATA a la API para que esa info se registre como usuario
     try {
-      const response = await registerUser(data)
-      if (response.status === 201) {
+      const response = await registerUser(data)// se le manda la data a la peticion 
+      if (response.status === 201) { //si la respuesta de la peticion es 201 te regresa al login
         console.log('User created successfully')
         navigate('/login')
       }
     }catch (error) {
-      console.error('Error al crear el usuario:', error.message)
+      console.error('Error al crear el usuario:', error.message)// si algo falla aqui sale
     }
   }
   return (

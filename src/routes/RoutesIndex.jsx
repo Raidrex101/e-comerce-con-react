@@ -1,14 +1,14 @@
-import { Route, Routes, Navigate } from "react-router-dom"
-import { useAuthContext } from "../hooks/useAuth"
-import Secret from "../Pages/Secret"
-import PropTypes from "prop-types"
-import Home from "../Pages/Home"
 import Cart from "../Pages/Cart"
+import Home from "../Pages/Home"
 import Login from "../Pages/Login"
+import PropTypes from "prop-types"
 import Singup from "../Pages/Singup"
+import Secret from "../Pages/Secret"
 import ProductPage from "../Pages/ProductPage"
+import { useAuthContext } from "../hooks/useAuth"
+import { Route, Routes, Navigate } from "react-router-dom"
 
-const RoutesIndex = ({searchTerm}) => {
+const RoutesIndex = ({searchTerm}) => { //rutas a todas las paginas de la aplicacion
     const {autenticated, userPayload} = useAuthContext()
     return (
         <Routes>

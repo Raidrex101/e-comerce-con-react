@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { ProductProvider } from './context/ProductContext'
+import { CartProvider } from './context/CartContext'
 import RoutesIndex from './routes/RoutesIndex'
 import Navbar from './components/Index'
 import './App.css'
@@ -19,12 +20,15 @@ function App() {
 
             <Navbar setSearchTerm={setSearchTerm} />
 
-            <RoutesIndex searchTerm={searchTerm} />
+            <CartProvider>
+
+              <RoutesIndex searchTerm={searchTerm} />
+
+            </CartProvider>
 
           </BrowserRouter>
 
         </AuthProvider>
-
 
       </ProductProvider>
     </>
