@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const Main_URL = 'https://ecommerce-json-jwt.onrender.com'
+const Main_URL = 'https://proyecto-e-comerce-con-react-dev-f-33a.onrender.com'
 
 const registerUser = (data) => axios.post(`${Main_URL}/register`, data)
 

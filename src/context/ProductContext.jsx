@@ -7,7 +7,7 @@ const ProductProvider = ({children}) => {
 
     useEffect(() => {
         const request = () => {
-            fetch('https://ecommerce-json-jwt.onrender.com/items')
+            fetch('https://proyecto-e-comerce-con-react-dev-f-33a.onrender.com/items')
                 .then(res => res.json())
                 .then(data => {
                     setProducts(data)
