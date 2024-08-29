@@ -20,7 +20,7 @@ const Home = ({ searchTerm = '' }) => {
         setClickedProduct(product.id)// Se activa el estado clickedProduct al agregar un producto al carrito
         setTimeout(() => {
             setClickedProduct(null)// Se desactiva el estado clickedProduct al pasar 1 segundo
-        }, 500)
+        }, 1000)
     }
     // Resetea el estado de isClicked después de 1/2 segundo
    
@@ -68,7 +68,7 @@ const Home = ({ searchTerm = '' }) => {
                                     {autenticated ? (
                                         <button
                                         className={`btn ${clickedProduct === product.id ? 'btn-success' : 'btn-primary'}`}
-                                            onClick={() => handleClick(product)}>Add to cart</button>
+                                            onClick={() => handleClick(product)}>{clickedProduct === product.id ? 'Added to cart' : 'Add to cart'}</button>
                                     ) : (
                                         <button
                                             onClick={() => navigate("/login")}

@@ -19,7 +19,7 @@ const ProductPage = () => {
         setClickedProduct(product.id)// Se activa el estado clickedProduct al agregar un producto al carrito
         setTimeout(() => {
             setClickedProduct(null)// Se desactiva el estado clickedProduct al pasar 1 segundo
-        }, 500);
+        }, 1000);
     }
     // Resetea el estado de isClicked después de 1/2 segundo
     const handleImageError = (e) => {
@@ -60,7 +60,7 @@ const ProductPage = () => {
                 <button 
                 onClick={() => handleClick(product)} 
                 className={`btn ${clickedProduct === product.id ? 'btn-success' : 'btn-primary'}`}>
-                    Add to cart</button>{/* agrega al carrito el producto */}
+                    {clickedProduct === product.id ? 'Added to cart' : 'Add to cart'}</button>{/* agrega al carrito el producto */}
                 </>
             )
             : (
