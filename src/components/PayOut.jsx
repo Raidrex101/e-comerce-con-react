@@ -1,10 +1,10 @@
 const PayOut = () => {
   return (
    
-    <div className=" col-md-7 col-lg-8">
+    <div className=" col-md-7 col-lg-8 ">
             <h4 className="mb-3">Billing address</h4>
-            <form className="needs-validation was-validated" noValidate="">
-              <div className="row g-3">
+            <form className="needs-validation " noValidate="">
+              <div className="row">
                 <div className="col-sm-6">
                   <label htmlFor="firstName" className="form-label">
                     First name
@@ -246,7 +246,7 @@ const PayOut = () => {
               </div>
               <hr className="my-4" />
               <button className="w-100 btn btn-primary btn-lg" type="submit">
-                Continue to checkout
+                Proseed the payment
               </button>
             </form>
           </div>

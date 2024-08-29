@@ -1,5 +1,5 @@
-import notFound from "../img/500.jpg"
 import ProductCreator from "../components/ProductCreator"
+import PlaceholderForImg from "../components/PlaceholderForImg"
 import { useAuthContext } from "../hooks/useAuth"
 import { useEffect, useState, useContext } from "react"
 import { ProductContext } from "../context/ProductContext"
@@ -10,6 +10,7 @@ const Secret = () => {
   const [user, setUser] = useState("") /* Nombre de usuario */
   const { autenticated } = useAuthContext() /* Autenticado o no? */
   const { products, setProducts } = useContext(ProductContext) /* Productos */
+const placeholderImage = 'https://http.cat/images/500.jpg'
 
   useEffect(() => {
     const fetchUserData = async () => { /* peticion para pedir los datos del usuario en especifico el nombre */
@@ -63,19 +64,17 @@ const Secret = () => {
         <div className='container my-3 '>
 
           <div className='row gap-3 '>
-            {products.map(product => (
+            {products?.map((product, id) => (
 
-              <div key={product.id}
+              <div key={id}
                 className='card shadow-lg p-3 mb-5 bg-body-secondary rounded'
                 style={{ width: "15.7rem", textDecoration: "none" }}
               >
-                <img
-                  src={product.image}
-                  className='card-img-top' style={{ height: "200px" }}
-                  alt='Error loading image, image link may be broken'
-                  onError={(e) => {
-                    e.target.src = notFound
-                  }} />
+                <PlaceholderForImg
+                                        src={product.image}
+                                        alt={product.product_name}
+                                        notFoundSrc={placeholderImage}
+                                    />
 
                 <div className='card-body text-center'>
                   <h5 className='card-title'>{product.product_name}</h5>

@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { createProduct } from "../services/UserServices"
+import { createProduct, getAllProducts } from "../services/UserServices"
 import { useNavigate } from "react-router-dom"
 import { useForm } from 'react-hook-form'
 import { ProductContext } from "../context/ProductContext"
@@ -12,11 +12,12 @@ const ProductCreator = () => {
     const onSubmit = async (newProduct) => { //se llama desde el boton del modal en la linea 126 para manejar el evento submit del modal
         try {
             const token = localStorage.getItem('token')// se obtiene el token desde el local storage para la peticion 
-            const response = await createProduct(newProduct, token)// se le pasan los datos del nuevo producto y del token a la peticion axios
-            setProducts([...products, response.data])//se desestructura el arreglo products para agregar el nuevo producto y se setea el nuevo conjunto con el set products para que aparesca en la lista
+             await createProduct(newProduct, token)// se le pasan los datos del nuevo producto y del token a la peticion axios
+            const response = await getAllProducts() //se realiza una nueva peticiion de todos los productos para que el nuevo se renderize de forma correcta ya que la respuesta de la peticion es un string y no un json con los datos del producto
+            setProducts(response.data) //la respuesta es la nueva peticion de todos los productos para que el nuevo se renderize de forma correcta
             console.log('product created successfully')
             navigate('/')
-            window.location.reload() // sin esto home truena dando un error en el filter de cannot read properties of undefined reading toLowerCase
+            
 
 
         } catch (error) {
@@ -78,10 +79,11 @@ const ProductCreator = () => {
                                         className='form-control'
                                         id='category'
                                         name='Category'
+                                        key={1}
                                         {...register('category', { required: true })}>
 
-                                        {category.map(category => (
-                                            <option key={category} value={category}>{category}</option> /* mapeo de las categorias del Set para seleccionatlas */
+                                        {category?.map((category, id) => (
+                                            <option key={id} value={category}>{category}</option> /* mapeo de las categorias del Set para seleccionatlas */
                                         ))}
                                     </select>
                                     <label htmlFor="gender">Category</label>
@@ -99,6 +101,21 @@ const ProductCreator = () => {
                                     <label htmlFor='floatingInput'>Image Url</label>
                                     {errors.image && <span>Image is required</span>}
                                 </div>
+
+                                <div className='form-floating'>
+                                    <input type='text'
+                                        className='form-control'
+                                        id='description'
+                                        name='description'
+                                        placeholder='description'
+                                        {...register('description', { required: true })}
+                                    />
+                                    <label htmlFor='floatingInput'>Description</label>
+                                    {errors.image && <span>Description is required</span>}
+                                </div>
+
+                                
+
 
                                 <div className='form-floating'>
                                     <input type='text'

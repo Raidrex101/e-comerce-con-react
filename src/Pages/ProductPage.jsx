@@ -1,9 +1,9 @@
-import { useContext } from "react"
-import notFound from '../img/500.jpg'
+import { useContext,useState } from "react"
 import { useAuthContext } from '../hooks/useAuth'
 import { CartContext } from "../context/CartContext"
 import { ProductContext } from "../context/ProductContext"
 import { useParams, useNavigate } from "react-router-dom"
+
 
 const ProductPage = () => {
     const {id} = useParams()//id del producto desde la url dinamica
@@ -11,13 +11,27 @@ const ProductPage = () => {
     const { autenticated } = useAuthContext()
     const navigate = useNavigate()
     const { addProduct } = useContext(CartContext)
+    const placeholderImage = 'https://http.cat/images/500.jpg'
+    const [clickedProduct, setClickedProduct] = useState(null);
+
+    const handleClick = (product) => {
+        addProduct(product);
+        setClickedProduct(product.id)// Se activa el estado clickedProduct al agregar un producto al carrito
+        setTimeout(() => {
+            setClickedProduct(null)// Se desactiva el estado clickedProduct al pasar 1 segundo
+        }, 500);
+    }
+    // Resetea el estado de isClicked después de 1/2 segundo
+    const handleImageError = (e) => {
+        e.target.src = placeholderImage
+    }
 
     const product = products.find(product => product.id === id)
     if (!product) { //existe un rpoducto con este id?
         return (
             <>
             <div className='container text-center py-5'>
-                <img src={notFound}
+                <img src={placeholderImage}
                 style={{ height: "500px" }}
                 className="rounded mx-auto d-block"
                 alt="Even the image was not found :(" 
@@ -31,7 +45,11 @@ const ProductPage = () => {
     <div className='container text-center'>
             <h1>{product.product_name}</h1>
             <img 
-            style={{ height: "500px" }} src={product.image} alt={notFound} />
+            style={{ height: "500px" }} 
+            src={product.image || placeholderImage }
+            alt={product.product_name}
+            onError={handleImageError}
+            />
             <br />
             <strong>Price: ${product.price}</strong>
             <br />
@@ -40,7 +58,9 @@ const ProductPage = () => {
             {autenticated ? (
                 <>
                 <button 
-                onClick={() => addProduct(product)} className="btn btn-primary">Add to cart</button>{/* agrega al carrito el producto */}
+                onClick={() => handleClick(product)} 
+                className={`btn ${clickedProduct === product.id ? 'btn-success' : 'btn-primary'}`}>
+                    Add to cart</button>{/* agrega al carrito el producto */}
                 </>
             )
             : (

@@ -11,7 +11,7 @@ const ProductProvider = ({children}) => {
                 .then(res => res.json())
                 .then(data => {
                     setProducts(data)
-                    console.log(data)
+                   
                 })
                 .catch(err => console.log(err))
         }
