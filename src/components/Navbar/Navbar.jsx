@@ -17,7 +17,7 @@ const Navbar = ({ setSearchTerm }) => {
         const token = localStorage.getItem('token')
         if (token) {
           const response = await getMyUserService(token)
-          console.log("User data:", response.data)
+          
           
           setUser(response.data.first_name)
         }
